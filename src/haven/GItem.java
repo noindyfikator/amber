@@ -29,11 +29,9 @@ package haven;
 import haven.res.ui.tt.q.qbuff.QBuff;
 import integrations.food.FoodService;
 
-import java.awt.*;
+import java.awt.Color;
+import java.util.*;
 import java.awt.image.BufferedImage;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 import static haven.Text.num10Fnd;
 
@@ -65,7 +63,6 @@ public class GItem extends AWidget implements ItemInfo.SpriteOwner, GSprite.Owne
 
     public interface OverlayInfo<T> {
         public T overlay();
-
         public void drawoverlay(GOut g, T data);
     }
 
@@ -83,19 +80,18 @@ public class GItem extends AWidget implements ItemInfo.SpriteOwner, GSprite.Owne
         }
 
         public static <S> InfoOverlay<S> create(OverlayInfo<S> inf) {
-            return (new InfoOverlay<S>(inf));
+            return(new InfoOverlay<S>(inf));
         }
     }
 
     public interface NumberInfo extends OverlayInfo<Tex> {
         public int itemnum();
-
         public default Color numcolor() {
-            return (Color.WHITE);
+            return(Color.WHITE);
         }
 
         public default Tex overlay() {
-            return (new TexI(GItem.NumberInfo.numrender(itemnum(), numcolor())));
+            return(new TexI(GItem.NumberInfo.numrender(itemnum(), numcolor())));
         }
 
         public default void drawoverlay(GOut g, Tex tex) {
@@ -231,7 +227,7 @@ public class GItem extends AWidget implements ItemInfo.SpriteOwner, GSprite.Owne
                 quality = null;
             rawinfo = new ItemInfo.Raw(args);
         } else if (name == "meter") {
-            meter = (int) ((Number) args[0]).doubleValue();
+            meter = (int)((Number)args[0]).doubleValue();
             metertex = Text.renderstroked(String.format("%d%%", meter), Color.WHITE, Color.BLACK, num10Fnd).tex();
         }
     }
@@ -286,8 +282,8 @@ public class GItem extends AWidget implements ItemInfo.SpriteOwner, GSprite.Owne
             }
             if (curs != null && curs.name.equals("gfx/hud/curs/mine") &&
                     (Config.dropMinedStones && Config.mineablesStone.contains(name) ||
-                            Config.dropMinedOre && Config.mineablesOre.contains(name) ||
-                            Config.dropMinedOrePrecious && Config.mineablesOrePrecious.contains(name) ||
+                    Config.dropMinedOre && Config.mineablesOre.contains(name) ||
+                    Config.dropMinedOrePrecious && Config.mineablesOrePrecious.contains(name) ||
                             Config.dropMinedCurios && Config.mineablesCurios.contains(name))) {
                 this.wdgmsg("drop", Coord.z);
             }

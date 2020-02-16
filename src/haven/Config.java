@@ -140,24 +140,24 @@ public class Config {
     public static boolean dropSand = Utils.getprefb("dropSand", false);
     public static boolean showdframestatus = Utils.getprefb("showdframestatus", true);
     public static boolean enableorthofullzoom = Utils.getprefb("enableorthofullzoom", false);
-    public static boolean partycircles = Utils.getprefb("partycircles", false);
-    public static boolean alarmbram = Utils.getprefb("alarmbram", false);
+    public static boolean partycircles =  Utils.getprefb("partycircles", false);
+    public static boolean alarmbram =  Utils.getprefb("alarmbram", false);
     public static double alarmbramvol = Utils.getprefd("alarmbramvol", 1.0);
     public static double sfxwhipvol = Utils.getprefd("sfxwhipvol", 0.9);
-    public static boolean showarchvector = Utils.getprefb("showarchvector", false);
-    public static boolean autologout = Utils.getprefb("autologout", false);
-    public static boolean logcombatactions = Utils.getprefb("logcombatactions", false);
-    public static boolean autopickmussels = Utils.getprefb("autopickmussels", false);
-    public static boolean confirmmagic = Utils.getprefb("confirmmagic", true);
-    public static boolean altfightui = Utils.getprefb("altfightui", false);
-    public static boolean combshowkeys = Utils.getprefb("combshowkeys", true);
-    public static boolean combaltopenings = Utils.getprefb("combaltopenings", true);
-    public static boolean studyhist = Utils.getprefb("studyhist", false);
-    public static boolean studybuff = Utils.getprefb("studybuff", false);
-    public static int zkey = Utils.getprefi("zkey", KeyEvent.VK_Z);
-    public static boolean disableterrainsmooth = Utils.getprefb("disableterrainsmooth", false);
-    public static boolean disableelev = Utils.getprefb("disableelev", false);
-    public static String treeboxclr = Utils.getpref("treeboxclr", "D7FF00");
+    public static boolean showarchvector =  Utils.getprefb("showarchvector", false);
+    public static boolean autologout =  Utils.getprefb("autologout", false);
+    public static boolean logcombatactions =  Utils.getprefb("logcombatactions", false);
+    public static boolean autopickmussels =  Utils.getprefb("autopickmussels", false);
+    public static boolean confirmmagic =  Utils.getprefb("confirmmagic", true);
+    public static boolean altfightui =  Utils.getprefb("altfightui", false);
+    public static boolean combshowkeys =  Utils.getprefb("combshowkeys", true);
+    public static boolean combaltopenings =  Utils.getprefb("combaltopenings", true);
+    public static boolean studyhist =  Utils.getprefb("studyhist", false);
+    public static boolean studybuff =  Utils.getprefb("studybuff", false);
+    public static int zkey =  Utils.getprefi("zkey", KeyEvent.VK_Z);
+    public static boolean disableterrainsmooth =  Utils.getprefb("disableterrainsmooth", false);
+    public static boolean disableelev =  Utils.getprefb("disableelev", false);
+    public static String treeboxclr =  Utils.getpref("treeboxclr", "D7FF00");
     public static boolean highlightpots = Utils.getprefb("highlightpots", false);
     public static boolean bonsai = Utils.getprefb("bonsai", false);
     public static int fontsizechat = Utils.getprefi("fontsizechat", 14);
@@ -178,7 +178,7 @@ public class Config {
     public final static String chatfile = "chatlog.txt";
     public static PrintWriter chatlog = null;
 
-    public final static HashMap<String, CheckListboxItem> boulders = new HashMap<String, CheckListboxItem>(30) {{
+    public final static HashMap<String, CheckListboxItem> boulders = new HashMap<String, CheckListboxItem>(31) {{
         put("basalt", new CheckListboxItem("Basalt"));
         put("schist", new CheckListboxItem("Schist"));
         put("dolomite", new CheckListboxItem("Dolomite"));
@@ -209,6 +209,7 @@ public class Config {
         put("breccia", new CheckListboxItem("Breccia"));
         put("diabase", new CheckListboxItem("Diabase"));
         put("arkose", new CheckListboxItem("Arkose"));
+        put("diorite", new CheckListboxItem("Diorite"));
     }};
 
     public final static HashMap<String, CheckListboxItem> bushes = new HashMap<String, CheckListboxItem>(24) {{
@@ -300,7 +301,7 @@ public class Config {
         put("strawberrytree", new CheckListboxItem("Wood Strawberry"));
     }};
 
-    public final static HashMap<String, CheckListboxItem> icons = new HashMap<String, CheckListboxItem>(49) {{
+    public final static HashMap<String, CheckListboxItem> icons = new HashMap<String, CheckListboxItem>(50) {{
         put("dandelion", new CheckListboxItem("Dandelion"));
         put("chantrelle", new CheckListboxItem("Chantrelle"));
         put("blueberry", new CheckListboxItem("Blueberry"));
@@ -351,6 +352,7 @@ public class Config {
         put("mistletoe", new CheckListboxItem("Mistletoe"));
         put("waterstrider", new CheckListboxItem("Waterstrider"));
         put("firefly", new CheckListboxItem("Firefly"));
+        put("duskfern", new CheckListboxItem("Cave Fern"));
     }};
 
     public final static HashMap<String, CheckListboxItem> flowermenus = new HashMap<String, CheckListboxItem>(19) {{
@@ -449,9 +451,14 @@ public class Config {
             "soapstone",
             "sodalite",
             "olivine",
-            "alabaster"
+            "alabaster",
+            "breccia",
+            "diabase",
+            "arkose",
+            "diorite",
+            "kyanite",
+            "slate"
     ));
-
 
     public final static Set<String> mineablesOre = new HashSet<String>(Arrays.asList(
             "cassiterite",
@@ -614,8 +621,7 @@ public class Config {
             } finally {
                 in.close();
             }
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
         // populate grid ids map
         BufferedReader reader = null;
@@ -629,7 +635,7 @@ public class Config {
                 } catch (NumberFormatException nfe) {
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException e){
             e.printStackTrace();
         } finally {
             if (reader != null) {
@@ -662,14 +668,14 @@ public class Config {
         try {
             List<String> larr = new ArrayList<String>();
             for (LoginData ld : logins) {
-                String ldjson = new JSONObject(ld, new String[]{"name", "pass"}).toString();
+                String ldjson = new JSONObject(ld, new String[] {"name", "pass"}).toString();
                 larr.add(ldjson);
             }
             String jsonobjs = "";
             for (String s : larr)
                 jsonobjs += s + ",";
             if (jsonobjs.length() > 0)
-                jsonobjs = jsonobjs.substring(0, jsonobjs.length() - 1);
+                jsonobjs = jsonobjs.substring(0, jsonobjs.length()-1);
             Utils.setpref("logins", "[" + jsonobjs + "]");
         } catch (Exception e) {
             e.printStackTrace();
@@ -681,8 +687,8 @@ public class Config {
             return null;
         try {
             return new URL(url);
-        } catch (java.net.MalformedURLException e) {
-            throw (new RuntimeException(e));
+        } catch(java.net.MalformedURLException e) {
+            throw(new RuntimeException(e));
         }
     }
 
