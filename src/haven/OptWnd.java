@@ -32,8 +32,8 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.prefs.BackingStoreException;
@@ -67,7 +67,7 @@ public class OptWnd extends Window {
         }
 
         public boolean keydown(java.awt.event.KeyEvent ev) {
-            if((this.key != -1) && (ev.getKeyChar() == this.key)) {
+            if ((this.key != -1) && (ev.getKeyChar() == this.key)) {
                 click();
                 return (true);
             }
@@ -194,6 +194,7 @@ public class OptWnd extends Window {
                     {
                         a = Config.disabletiletrans;
                     }
+
                     public void set(boolean val) {
                         Config.disabletiletrans = val;
                         Utils.setprefb("disabletiletrans", val);
@@ -204,6 +205,7 @@ public class OptWnd extends Window {
                     {
                         a = Config.disableterrainsmooth;
                     }
+
                     public void set(boolean val) {
                         Config.disableterrainsmooth = val;
                         Utils.setprefb("disableterrainsmooth", val);
@@ -214,6 +216,7 @@ public class OptWnd extends Window {
                     {
                         a = Config.disableelev;
                     }
+
                     public void set(boolean val) {
                         Config.disableelev = val;
                         Utils.setprefb("disableelev", val);
@@ -883,6 +886,17 @@ public class OptWnd extends Window {
                 a = val;
             }
         });
+        appender.add(new CheckBox("Drop sand") {
+            {
+                a = Config.dropSand;
+            }
+
+            public void set(boolean val) {
+                Utils.setprefb("dropSand", val);
+                Config.dropSand = val;
+                a = val;
+            }
+        });
         general.add(new PButton(200, "Back", 27, main), new Coord(210, 360));
         general.pack();
     }
@@ -1251,11 +1265,13 @@ public class OptWnd extends Window {
                     public void added() {
                         updateLabel();
                     }
+
                     public void changed() {
                         Utils.setprefi("fontadd", val);
                         Config.fontadd = val;
                         updateLabel();
                     }
+
                     private void updateLabel() {
                         fontAdd.settext(String.format("%d", val));
                     }
@@ -1284,7 +1300,7 @@ public class OptWnd extends Window {
                 Utils.delpref("fbelt_vertical");
             }
         };
-        uis.add(resetWndBtn, new Coord(620 / 2 - resetWndBtn.sz.x / 2 , 320));
+        uis.add(resetWndBtn, new Coord(620 / 2 - resetWndBtn.sz.x / 2, 320));
         uis.add(new PButton(200, "Back", 27, main), new Coord(210, 360));
         uis.pack();
     }
@@ -1327,13 +1343,13 @@ public class OptWnd extends Window {
             }
         });
         appender.addRow(
-            new Label("Background transparency (req. restart):"),
-            new HSlider(200, 0, 255, Config.qualitybgtransparency) {
-                public void changed() {
-                    Utils.setprefi("qualitybgtransparency", val);
-                    Config.qualitybgtransparency = val;
-                }
-            });
+                new Label("Background transparency (req. restart):"),
+                new HSlider(200, 0, 255, Config.qualitybgtransparency) {
+                    public void changed() {
+                        Utils.setprefi("qualitybgtransparency", val);
+                        Config.qualitybgtransparency = val;
+                    }
+                });
 
         quality.add(new PButton(200, "Back", 27, main), new Coord(210, 360));
         quality.pack();
@@ -1397,7 +1413,7 @@ public class OptWnd extends Window {
         appender.add(new HSlider(200, 0, 1000, 0) {
             protected void attach(UI ui) {
                 super.attach(ui);
-                val = (int)(Config.alarmunknownvol * 1000);
+                val = (int) (Config.alarmunknownvol * 1000);
             }
 
             public void changed() {
@@ -1606,7 +1622,7 @@ public class OptWnd extends Window {
         appender.addRow(KB_NAME_W, new Label("Take screenshot & Upload "), new SetButton(175, GameUI.kb_shoot));
         appender.addRow(KB_NAME_W, new Label("Take screenshot & Save"), new SetButton(175, GameUI.kb_shoot_save));
         appender.addRow(KB_NAME_W, new Label("Combat action 1"), new SetButton(175, Fightsess.kb_acts[0]));
-        for(int i = 1; i < Fightsess.kb_acts.length; i++) {
+        for (int i = 1; i < Fightsess.kb_acts.length; i++) {
             appender.addRow(KB_NAME_W, new Label("Combat action " + (i + 1)), new SetButton(175, Fightsess.kb_acts[i]));
         }
         appender.addRow(KB_NAME_W, new Label("Switch combat opponent"), new SetButton(175, Fightsess.kb_switch));
@@ -1633,10 +1649,10 @@ public class OptWnd extends Window {
         }
 
         public void click() {
-            if(mg == null) {
+            if (mg == null) {
                 change("Click element...");
                 mg = ui.grabmouse(this);
-            } else if(kg != null) {
+            } else if (kg != null) {
                 kg.remove();
                 kg = null;
                 change(msg);
@@ -1644,52 +1660,55 @@ public class OptWnd extends Window {
         }
 
         private boolean handle(KeyEvent ev) {
-            switch(ev.getKeyCode()) {
-                case KeyEvent.VK_SHIFT: case KeyEvent.VK_CONTROL: case KeyEvent.VK_ALT:
-                case KeyEvent.VK_META: case KeyEvent.VK_WINDOWS:
-                    return(false);
+            switch (ev.getKeyCode()) {
+                case KeyEvent.VK_SHIFT:
+                case KeyEvent.VK_CONTROL:
+                case KeyEvent.VK_ALT:
+                case KeyEvent.VK_META:
+                case KeyEvent.VK_WINDOWS:
+                    return (false);
             }
             int code = ev.getKeyCode();
-            if(code == KeyEvent.VK_ESCAPE) {
-                return(true);
+            if (code == KeyEvent.VK_ESCAPE) {
+                return (true);
             }
-            if(code == KeyEvent.VK_BACK_SPACE) {
+            if (code == KeyEvent.VK_BACK_SPACE) {
                 cmd.set(null);
-                return(true);
+                return (true);
             }
-            if(code == KeyEvent.VK_DELETE) {
+            if (code == KeyEvent.VK_DELETE) {
                 cmd.set(KeyMatch.nil);
-                return(true);
+                return (true);
             }
             KeyMatch key = KeyMatch.forevent(ev, ~cmd.modign);
-            if(key != null)
+            if (key != null)
                 cmd.set(key);
-            return(true);
+            return (true);
         }
 
         public boolean mousedown(Coord c, int btn) {
-            if(mg == null)
-                return(super.mousedown(c, btn));
+            if (mg == null)
+                return (super.mousedown(c, btn));
             Coord gc = ui.mc;
-            if(btn == 1) {
+            if (btn == 1) {
                 this.cmd = KeyBinding.Bindable.getbinding(ui.root, gc);
-                return(true);
+                return (true);
             }
-            if(btn == 3) {
+            if (btn == 3) {
                 mg.remove();
                 mg = null;
                 change(msg);
-                return(true);
+                return (true);
             }
-            return(false);
+            return (false);
         }
 
         public boolean mouseup(Coord c, int btn) {
-            if(mg == null)
-                return(super.mouseup(c, btn));
+            if (mg == null)
+                return (super.mouseup(c, btn));
             Coord gc = ui.mc;
-            if(btn == 1) {
-                if((this.cmd != null) && (KeyBinding.Bindable.getbinding(ui.root, gc) == this.cmd)) {
+            if (btn == 1) {
+                if ((this.cmd != null) && (KeyBinding.Bindable.getbinding(ui.root, gc) == this.cmd)) {
                     mg.remove();
                     mg = null;
                     kg = ui.grabkeys(this);
@@ -1697,30 +1716,30 @@ public class OptWnd extends Window {
                 } else {
                     this.cmd = null;
                 }
-                return(true);
+                return (true);
             }
-            if(btn == 3)
-                return(true);
-            return(false);
+            if (btn == 3)
+                return (true);
+            return (false);
         }
 
         public Resource getcurs(Coord c) {
-            if(mg == null)
-                return(null);
-            return(curs);
+            if (mg == null)
+                return (null);
+            return (curs);
         }
 
         public boolean keydown(KeyEvent ev) {
-            if(kg == null)
-                return(super.keydown(ev));
-            if(handle(ev)) {
+            if (kg == null)
+                return (super.keydown(ev));
+            if (handle(ev)) {
                 kg.remove();
                 kg = null;
                 cmd = null;
                 change("Click another element...");
                 mg = ui.grabmouse(this);
             }
-            return(true);
+            return (true);
         }
     }
 
@@ -1738,7 +1757,7 @@ public class OptWnd extends Window {
         }
 
         protected KeyMatch mkmatch(KeyEvent ev) {
-            return(KeyMatch.forevent(ev, ~cmd.modign));
+            return (KeyMatch.forevent(ev, ~cmd.modign));
         }
 
         protected boolean handle(KeyEvent ev) {
