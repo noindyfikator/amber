@@ -137,26 +137,27 @@ public class Config {
     public static boolean dropMinedCurios = Utils.getprefb("dropMinedCurios", true);
     public static boolean dropEverything = false; //for safety.  //Utils.getprefb("dropEverything", true);
     public static boolean dropSoil = Utils.getprefb("dropSoil", false);
+    public static boolean dropSand = Utils.getprefb("dropSand", false);
     public static boolean showdframestatus = Utils.getprefb("showdframestatus", true);
     public static boolean enableorthofullzoom = Utils.getprefb("enableorthofullzoom", false);
-    public static boolean partycircles =  Utils.getprefb("partycircles", false);
-    public static boolean alarmbram =  Utils.getprefb("alarmbram", false);
+    public static boolean partycircles = Utils.getprefb("partycircles", false);
+    public static boolean alarmbram = Utils.getprefb("alarmbram", false);
     public static double alarmbramvol = Utils.getprefd("alarmbramvol", 1.0);
     public static double sfxwhipvol = Utils.getprefd("sfxwhipvol", 0.9);
-    public static boolean showarchvector =  Utils.getprefb("showarchvector", false);
-    public static boolean autologout =  Utils.getprefb("autologout", false);
-    public static boolean logcombatactions =  Utils.getprefb("logcombatactions", false);
-    public static boolean autopickmussels =  Utils.getprefb("autopickmussels", false);
-    public static boolean confirmmagic =  Utils.getprefb("confirmmagic", true);
-    public static boolean altfightui =  Utils.getprefb("altfightui", false);
-    public static boolean combshowkeys =  Utils.getprefb("combshowkeys", true);
-    public static boolean combaltopenings =  Utils.getprefb("combaltopenings", true);
-    public static boolean studyhist =  Utils.getprefb("studyhist", false);
-    public static boolean studybuff =  Utils.getprefb("studybuff", false);
-    public static int zkey =  Utils.getprefi("zkey", KeyEvent.VK_Z);
-    public static boolean disableterrainsmooth =  Utils.getprefb("disableterrainsmooth", false);
-    public static boolean disableelev =  Utils.getprefb("disableelev", false);
-    public static String treeboxclr =  Utils.getpref("treeboxclr", "D7FF00");
+    public static boolean showarchvector = Utils.getprefb("showarchvector", false);
+    public static boolean autologout = Utils.getprefb("autologout", false);
+    public static boolean logcombatactions = Utils.getprefb("logcombatactions", false);
+    public static boolean autopickmussels = Utils.getprefb("autopickmussels", false);
+    public static boolean confirmmagic = Utils.getprefb("confirmmagic", true);
+    public static boolean altfightui = Utils.getprefb("altfightui", false);
+    public static boolean combshowkeys = Utils.getprefb("combshowkeys", true);
+    public static boolean combaltopenings = Utils.getprefb("combaltopenings", true);
+    public static boolean studyhist = Utils.getprefb("studyhist", false);
+    public static boolean studybuff = Utils.getprefb("studybuff", false);
+    public static int zkey = Utils.getprefi("zkey", KeyEvent.VK_Z);
+    public static boolean disableterrainsmooth = Utils.getprefb("disableterrainsmooth", false);
+    public static boolean disableelev = Utils.getprefb("disableelev", false);
+    public static String treeboxclr = Utils.getpref("treeboxclr", "D7FF00");
     public static boolean highlightpots = Utils.getprefb("highlightpots", false);
     public static boolean bonsai = Utils.getprefb("bonsai", false);
     public static int fontsizechat = Utils.getprefi("fontsizechat", 14);
@@ -605,7 +606,8 @@ public class Config {
             } finally {
                 in.close();
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         // populate grid ids map
         BufferedReader reader = null;
@@ -619,7 +621,7 @@ public class Config {
                 } catch (NumberFormatException nfe) {
                 }
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (reader != null) {
@@ -652,14 +654,14 @@ public class Config {
         try {
             List<String> larr = new ArrayList<String>();
             for (LoginData ld : logins) {
-                String ldjson = new JSONObject(ld, new String[] {"name", "pass"}).toString();
+                String ldjson = new JSONObject(ld, new String[]{"name", "pass"}).toString();
                 larr.add(ldjson);
             }
             String jsonobjs = "";
             for (String s : larr)
                 jsonobjs += s + ",";
             if (jsonobjs.length() > 0)
-                jsonobjs = jsonobjs.substring(0, jsonobjs.length()-1);
+                jsonobjs = jsonobjs.substring(0, jsonobjs.length() - 1);
             Utils.setpref("logins", "[" + jsonobjs + "]");
         } catch (Exception e) {
             e.printStackTrace();
@@ -671,8 +673,8 @@ public class Config {
             return null;
         try {
             return new URL(url);
-        } catch(java.net.MalformedURLException e) {
-            throw(new RuntimeException(e));
+        } catch (java.net.MalformedURLException e) {
+            throw (new RuntimeException(e));
         }
     }
 
