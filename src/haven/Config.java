@@ -178,7 +178,7 @@ public class Config {
     public final static String chatfile = "chatlog.txt";
     public static PrintWriter chatlog = null;
 
-    public final static HashMap<String, CheckListboxItem> boulders = new HashMap<String, CheckListboxItem>(31) {{
+    public final static HashMap<String, CheckListboxItem> boulders = new HashMap<String, CheckListboxItem>(30) {{
         put("basalt", new CheckListboxItem("Basalt"));
         put("schist", new CheckListboxItem("Schist"));
         put("dolomite", new CheckListboxItem("Dolomite"));
@@ -209,7 +209,6 @@ public class Config {
         put("breccia", new CheckListboxItem("Breccia"));
         put("diabase", new CheckListboxItem("Diabase"));
         put("arkose", new CheckListboxItem("Arkose"));
-        put("diorite", new CheckListboxItem("Diorite"));
     }};
 
     public final static HashMap<String, CheckListboxItem> bushes = new HashMap<String, CheckListboxItem>(24) {{
@@ -301,7 +300,7 @@ public class Config {
         put("strawberrytree", new CheckListboxItem("Wood Strawberry"));
     }};
 
-    public final static HashMap<String, CheckListboxItem> icons = new HashMap<String, CheckListboxItem>(50) {{
+    public final static HashMap<String, CheckListboxItem> icons = new HashMap<String, CheckListboxItem>(49) {{
         put("dandelion", new CheckListboxItem("Dandelion"));
         put("chantrelle", new CheckListboxItem("Chantrelle"));
         put("blueberry", new CheckListboxItem("Blueberry"));
@@ -352,7 +351,6 @@ public class Config {
         put("mistletoe", new CheckListboxItem("Mistletoe"));
         put("waterstrider", new CheckListboxItem("Waterstrider"));
         put("firefly", new CheckListboxItem("Firefly"));
-        put("duskfern", new CheckListboxItem("Cave Fern"));
     }};
 
     public final static HashMap<String, CheckListboxItem> flowermenus = new HashMap<String, CheckListboxItem>(19) {{
@@ -451,14 +449,9 @@ public class Config {
             "soapstone",
             "sodalite",
             "olivine",
-            "alabaster",
-            "breccia",
-            "diabase",
-            "arkose",
-            "diorite",
-            "kyanite",
-            "slate"
+            "alabaster"
     ));
+
 
     public final static Set<String> mineablesOre = new HashSet<String>(Arrays.asList(
             "cassiterite",
